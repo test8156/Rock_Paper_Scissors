@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let playerScore=0
+        let computerScore=0
+        function computerPlay() {
+            let hand="empty"
+            num=Math.floor(Math.random()*3)
+            if(num==0) {
+                hand="rock"
+            }
+            else if(num==1) {
+                hand="paper"
+            }
+            else if(num==2) {
+                hand="scissors"
+            }
+            return(hand)
+        }
+        function round(playerSelection,computerSelection) {
+            playerHand=playerSelection.toLowerCase()
+            if ((playerHand=="rock"&&computerSelection=="rock")||(playerHand=="paper"&&computerSelection=="paper")||(playerHand=="scissors"&&computerSelection=="scissors")) {
+                return("It's a tie! "+playerHand+" doesn't beat "+computerSelection)
+            }
+            if ((playerHand=="rock"&&computerSelection=="scissors")||(playerHand=="paper"&&computerSelection=="rock")||(playerHand=="scissors"&&computerSelection=="paper")) {
+                return("Congrats! You win! "+playerHand+" beats "+computerSelection)
+            }
+            if ((playerHand=="rock"&&computerSelection=="paper")||(playerHand=="paper"&&computerSelection=="scissors")||(playerHand=="scissors"&&computerSelection=="rock")) {
+                return("Oh no! You lost. "+playerHand+" looses to "+computerSelection)
+            }
+        }
+        function game() {
+            for (let i=1; i<=5;i++) {
+                let result=(round(prompt("rock, paper, or scissors"),computerPlay()))
+                console.log(result)
+                if (result.charAt(0)=="C") {
+                    playerScore=playerScore+1
+                }
+                else if (result.charAt(0)=="O") {
+                    computerScore=computerScore+1
+                }
+                console.log("player's score: "+playerScore)
+                console.log("computer's score: "+computerScore)
+            }
+            result(playerScore,computerScore)
+        }
+        function result(playerEndScore,computerEndScore) {
+            if (playerEndScore>computerEndScore) {
+                console.log("The game is over! You won! Your score is "+playerEndScore+" and the computer's score is "+computerEndScore)
+            }
+            else if (playerEndScore<computerEndScore) {
+                console.log("The game is over! You lost. Your score is "+playerEndScore+" and the computer's score is "+computerEndScore)
+            }
+            else if (playerEndScore==computerEndScore) {
+                console.log("The game is over! It's a tie! Your score is "+playerEndScore+" and the computer's score is "+computerEndScore)
+            }
+        }
+        game()
+    </script>
+</body>
+</html>
